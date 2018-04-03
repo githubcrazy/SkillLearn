@@ -1,6 +1,9 @@
 package com.example.ishanpant.skilllearn;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
     private ArrayList<DataHelper> dataHelperList;
     private Context context;
+    private String longitude;
+    DataHelper dataHelper;
 
     public DataAdapter(Context context , ArrayList<DataHelper> dataHelperList) {
         this.context = context;
@@ -35,7 +40,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        DataHelper dataHelper = dataHelperList.get(position);
+        dataHelper = dataHelperList.get(position);
         holder.text1.setText(dataHelper.getCityname());
         holder.text2.setText(String.valueOf(dataHelper.getPosition().getLongitde()));
         holder.text3.setText(String.valueOf(dataHelper.getPosition().getLatitude()));
@@ -55,7 +60,17 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
             text1 = (TextView) itemView.findViewById(R.id.text1);
             text2 = (TextView) itemView.findViewById(R.id.text2);
             text3 = (TextView) itemView.findViewById(R.id.text3);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,MapsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putFloat("longitude",dataHelper.getPosition().getLongitde());
+                    bundle.putFloat("latitude",dataHelper.getPosition().getLatitude());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
         }
-
     }
 }

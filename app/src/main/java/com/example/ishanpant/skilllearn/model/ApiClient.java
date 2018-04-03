@@ -13,8 +13,7 @@ import static com.example.ishanpant.skilllearn.BuildConfig.*;
 
 public class ApiClient {
 
-    //public static String BASE_URL = "http://www.mocky.io";
-    public static String BASE_URL = "http://localhost:1111";
+    public static String BASE_URL = "http://www.mocky.io";
 
     private static Retrofit retrofit = null;
 
